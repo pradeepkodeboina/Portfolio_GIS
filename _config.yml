@@ -1,0 +1,16 @@
+title: "Pradeep Kodeboina"
+theme: jekyll-theme-cayman   # or: minima, slate, modernist
+plugins: [jekyll-seo-tag]
+navbar:
+  - name: Home
+    link: /
+  - name: Projects
+    link: /projects
+  - name: Dashboards
+    link: /dashboards
+  - name: Skills
+    link: /skills
+  - name: Certifications
+    link: /certifications
+  - name: About
+    link: /about

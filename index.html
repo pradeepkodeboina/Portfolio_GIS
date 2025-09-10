@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pradeep Kodeboina · GIS Data Analyst Portfolio</title>
+  <meta name="description" content="Explore the GIS &amp; geospatial analytics portfolio of Pradeep Kodeboina. Featuring network analyses, coverage models, and interactive web maps/dashboards (ArcGIS, Python, Tableau, Power BI) that turn location data into decisions.">
+  <link rel="icon" href="assets/Data_scientist_Logo.png">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <!-- AOS CSS (scroll animations) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root{
+      --brand: #16a34a; /* emerald-600 */
+      --bg: #0b1220;
+      --fg: #0f172a;
+    }
+
+    html{ scroll-behavior: smooth; }
+    body{
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+      padding-top: 72px; /* space for fixed navbar */
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar-nav{ gap: 18px; }
+    .navbar .nav-link{ font-weight: 600; }
+    .navbar .nav-link.active{
+      color: var(--brand) !important;
+      text-shadow: 0 0 10px rgba(22,163,74,.35);
+    }
+    [data-theme="dark"] .navbar{ background:#0b1220 !important; border-color:#1e293b !important; }
+    [data-theme="dark"] .navbar .nav-link{ color:#e2e8f0; }
+    [data-theme="dark"] .navbar .navbar-toggler{ border-color:#475569; }
+    [data-theme="dark"] .navbar .navbar-toggler-icon{ filter: invert(1); opacity:.85; }
+
+    /* ===== HERO ===== */
+    .hero{ background:none !important; color:inherit; min-height:92vh; padding:96px 0; display:flex; align-items:center; }
+    .hero-eyebrow{ font-size: clamp(1.05rem, 1.8vw, 1.25rem); font-weight:600; margin-bottom:.25rem; color:#1f2937; }
+    .hero-name{ font-weight:800; font-size: clamp(3rem, 6.2vw, 4.25rem); line-height:1.05; letter-spacing:-.02em; color:#111; margin:0 0 .25rem 0; }
+    .hero-tagline{ font-size: clamp(1.05rem, 2vw, 1.25rem); color:#334155; margin-bottom:.5rem; }
+    .hero .typed, .hero .typed-cursor{ color:#1f2937 !important; text-shadow:none !important; }
+    [data-theme="dark"] .hero-name{ color:#fff; }
+    [data-theme="dark"] .hero-eyebrow, [data-theme="dark"] .hero-tagline, [data-theme="dark"] .hero .typed, [data-theme="dark"] .hero .typed-cursor{ color:#e5e7eb !important; }
+
+    .hero .row{ align-items:center; }
+    .hero-pic{
+      width: clamp(220px, 28vw, 400px);
+      height: clamp(220px, 28vw, 400px);
+      border-radius:50%;
+      object-fit:cover;
+      border:6px solid #fff;
+      box-shadow:0 0 0 6px rgba(22,163,74,.35);
+    }
+    [data-theme="dark"] .hero-pic{ border-color:#0b1220; box-shadow:0 0 0 6px rgba(34,197,94,.45); }
+
+    /* ===== SHARED SECTION STYLES ===== */
+    section{ padding:72px 0; }
+    .section-title{ font-weight:800; letter-spacing:-.02em; margin-bottom:24px; }
+
+    /* ===== PROJECT CARDS ===== */
+    .project-card{ border:1px solid #e5e7eb; border-radius:18px; overflow:hidden; transition: transform .2s ease, box-shadow .2s ease; background:#fff; }
+    .project-card:hover{ transform: translateY(-4px); box-shadow: 0 10px 30px rgba(2,6,23,.1); }
+    .project-img{ aspect-ratio:16 / 9; object-fit:cover; width:100%; }
+    .badge-soft{ background:#f1f5f9; color:#334155; border-radius:999px; padding:6px 10px; font-weight:600; font-size:.8rem; }
+    .filter .btn{ border-radius:999px; font-weight:600; }
+
+    /* ===== DASHBOARD THUMBS ===== */
+    .dash-thumb{ aspect-ratio:16/9; width:100%; object-fit:cover; border-radius:14px; border:1px solid #e5e7eb; }
+
+    /* ===== EXPERIENCE TIMELINE ===== */
+    .xp{ position:relative; margin-left:.5rem; padding-left:1.25rem; }
+    .xp::before{ content:""; position:absolute; left:14px; top:0; bottom:0; width:2px; background:linear-gradient(#e5e7eb,#94a3b8); }
+    .xp-item{ position:relative; padding-left:2.75rem; margin-bottom:26px; }
+    .xp-pin{ position:absolute; left:2px; top:.25rem; width:28px; height:28px; border-radius:50%; background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 3px #fff; border:1px solid #e5e7eb; font-size:.8rem; }
+    .xp-card{ border:1px solid #e5e7eb; border-radius:16px; background:#fff; padding:14px 16px; }
+    .xp-head{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+    .xp-logo{ width:36px; height:36px; border-radius:8px; background:#f1f5f9; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .xp-logo img{ width:100%; height:100%; object-fit:contain; }
+    .xp-role{ margin:0; font-weight:700; }
+    .xp-meta{ font-size:.85rem; color:#64748b; }
+    .xp-bullets{ margin:8px 0 0; }
+    .xp-chip{ background:#f1f5f9; color:#334155; border-radius:999px; padding:6px 10px; font-weight:600; font-size:.8rem; }
+    [data-theme="dark"] .xp::before{ background:#334155; }
+    [data-theme="dark"] .xp-card{ background:#0f172a; border-color:#1e293b; }
+    [data-theme="dark"] .xp-logo{ background:#0b1220; }
+
+    /* split columns for experience: 75/25 on lg+ */
+    @media (min-width: 992px){
+      .xp-split{ position:relative; display:grid; grid-template-columns: 3fr 1fr; gap:32px; }
+    }
+
+    /* ===== FOOTER & THEME ===== */
+    footer{ padding:40px 0; background:#0f172a; color:#cbd5e1; }
+    .btn-brand{ background:var(--brand); border-color:var(--brand); }
+    .btn-brand:hover{ filter:brightness(.95); }
+    [data-theme="dark"] body{ background:#0b1220; color:#cdd6f4; }
+    [data-theme="dark"] .project-card{ background:#0f172a; border-color:#1e293b; }
+    [data-theme="dark"] .badge-soft{ background:#1e293b; color:#e2e8f0; }
+    [data-theme="dark"] .dash-thumb{ border-color:#1e293b; }
+
+    /* certificate card images */
+.cert-img{
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;        /* use 'contain' if you prefer no cropping */
+  background: #fff;         /* keeps vendor logos on white */
+  border-bottom: 1px solid #e5e7eb;
+}
+[data-theme="dark"] .cert-img{ background:#0b1220; border-color:#1e293b; }
+
+  </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body data-bs-spy="scroll" data-bs-target="#navbarLinks" data-bs-offset="80" tabindex="0">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white border-bottom shadow-sm">
+    <div class="container-xxl">
+      <a class="navbar-brand fw-bold" href="#">Pradeep</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-lg-4" id="navbarLinks">
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dashboards">Dashboards</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item">
+            <button id="themeBtn" class="btn btn-sm btn-outline-secondary ms-lg-3" aria-label="Toggle theme">
+              <i id="themeIcon" class="fa-solid fa-sun"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container-xxl">
+      <div class="row align-items-center g-4 g-md-5 flex-md-nowrap">
+        <!-- LEFT: text -->
+        <div class="col-12 col-md-7 text-start" data-aos="fade-up">
+          <p class="hero-eyebrow">Hi there, I’m</p>
+          <h1 class="hero-name">Pradeep Kodeboina</h1>
+          <p class="hero-tagline">GIS Data Analyst, Data Product Owner &amp; Data Science Enthusiast</p>
+          <p class="h5 mb-4" id="typed-wrap"><span class="typed" id="typed"></span></p>
+
+         <div class="mt-3">
+        <a href="#projects" class="btn btn-dark btn-lg me-2">
+          <i class="fa-solid fa-rocket me-2"></i>See Projects
+        </a>
+        <a href="#dashboards" class="btn btn-dark btn-lg me-2">
+          <i class="fa-solid fa-chart-line me-2"></i>Dashboards
+        </a>
+      </div>
+      <div class="mt-3">
+        <a href="assets/Pradeep_Kodeboina_GIS_Resume.pdf" class="btn btn-dark btn-lg me-2">
+          <i class="fa-solid fa-file-arrow-down me-2"></i>Download Resume</a>
+      </div>
+    </div>
+
+
+        <!-- RIGHT: profile photo -->
+        <div class="col-12 col-md-5 text-center text-md-end mt-4 mt-md-0" data-aos="zoom-in">
+          <img src="assets/Profile pic copy.JPG" alt="Pradeep Kodeboina" class="hero-pic">
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- PROJECTS -->
+<section id="projects">
+  <div class="container-xxl">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="filter btn-group" role="group" aria-label="Filter projects">
+        <button class="btn btn-outline-secondary active" data-filter="all">All</button>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Behavioral Health Access Mapping & Routing Optimization (DA) -->
+      <div class="col-md-6 col-lg-4 project" data-category="web" data-aos="fade-up">
+        <div class="project-card h-100">
+          <img class="project-img" src="assets/gis_behavioral_health_access.jpg" alt="Behavioral Health Access Mapping thumbnail">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">ArcGIS Pro</span>
+              <span class="badge-soft">ArcGIS Online</span>
+              <span class="badge-soft">ArcPy</span>
+              <span class="badge-soft">Network Analyst</span>
+              <span class="badge-soft">ModelBuilder</span>
+              <span class="badge-soft">Tableau</span>
+            </div>
+            <h5 class="mb-1">Behavioral Health Access Mapping & Routing Optimization</h5>
+            <ul class="small text-secondary mb-3">
+              <li><strong>Situation:</strong> Statewide behavioral health programs needed accurate tract-level coverage and service-access validation to guide capacity planning.</li>
+              <li><strong>Task:</strong> Build trusted geospatial datasets, validate travel times/routes, and standardize QA/QC to support compliance and decisions.</li>
+              <li><strong>Action:</strong> Designed ArcGIS datasets, ran Network Analyst models, automated routing in ArcPy, built batch geoprocessing in ModelBuilder, and integrated maps with Tableau; authored SOPs and trained users.</li>
+              <li><strong>Result & Impact:</strong> Improved validation accuracy by <strong>35%</strong>, reduced reporting turnaround by <strong>40%</strong>, cut manual data correction by <strong>40%</strong>, enabling data-driven resource allocation and audit readiness.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logistics Geospatial Platform Modernization (BI) -->
+      <div class="col-md-6 col-lg-4 project" data-category="bi" data-aos="fade-up" data-aos-delay="50">
+        <div class="project-card h-100">
+          <img class="project-img" src="assets/gis_logistics_platform.jpg" alt="Logistics Geospatial Platform Modernization thumbnail">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">SQL Server</span>
+              <span class="badge-soft">ArcGIS Desktop</span>
+              <span class="badge-soft">ArcGIS Online</span>
+              <span class="badge-soft">Python</span>
+              <span class="badge-soft">ArcPy</span>
+              <span class="badge-soft">Power BI</span>
+              <span class="badge-soft">AWS S3</span>
+            </div>
+            <h5 class="mb-1">Logistics Geospatial Platform Modernization</h5>
+            <ul class="small text-secondary mb-3">
+              <li><strong>Situation:</strong> Rapid network growth exposed route anomalies, data quality gaps, and SLA visibility issues across delivery operations.</li>
+              <li><strong>Task:</strong> Modernize spatial data, publish actionable dashboards, align routes with zoning/risk, and lower support costs/complaints.</li>
+              <li><strong>Action:</strong> Built spatial DBs and digitized roadway/zoning layers; published WebMaps/Experience Builder apps; implemented LRS for complaint mapping; automated QA/QC with ArcPy; synced Esri↔AWS via Python; surfaced KPIs with SQL/Excel VBA and Power BI.</li>
+              <li><strong>Result & Impact:</strong> Cut manual editing by <strong>30%</strong>, shortened complaint resolution by <strong>15%</strong>, saved <strong>$80K</strong>/year, and reduced data-retrieval latency by <strong>20%</strong>, improving operational decisions end-to-end.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Customer Issue Mapping & Route Data Quality Program (DA) -->
+      <div class="col-md-6 col-lg-4 project" data-category="web" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-card h-100">
+          <img class="project-img" src="assets/gis_route_quality_program.jpg" alt="Customer Issue Mapping & Route Data Quality Program thumbnail">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">SQL</span>
+              <span class="badge-soft">Python</span>
+              <span class="badge-soft">ArcGIS</span>
+              <span class="badge-soft">OSM</span>
+              <span class="badge-soft">AWS</span>
+              <span class="badge-soft">LRS</span>
+              <span class="badge-soft">Data Governance</span>
+            </div>
+            <h5 class="mb-1">Customer Issue Mapping & Route Data Quality Program</h5>
+            <ul class="small text-secondary mb-3">
+              <li><strong>Situation:</strong> Fragmented customer issue data and inconsistent roadway segments slowed investigations and degraded route accuracy.</li>
+              <li><strong>Task:</strong> Clean/unify datasets, link customer issues to routes, improve alignment, and accelerate field response.</li>
+              <li><strong>Action:</strong> Consolidated data with SQL/Python; ran EDA; enforced validation (Informatica/Collibra); performed OSM-based route checks; linked <strong>400+</strong> tagged issues via AWS; applied LRS to visualize complaint density.</li>
+              <li><strong>Result & Impact:</strong> Reduced inconsistencies and man-hours by <strong>20%</strong>, improved editing accuracy, and sped response by <strong>15%</strong>, informing smarter customer-service zoning strategies.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- DASHBOARDS -->
+<section id="dashboards" class="bg-light">
+  <div class="container-xxl">
+    <h2 class="section-title">Dashboards</h2>
+
+    <div class="row g-4">
+      <!-- Financial Banking Complaints -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="p-3 border rounded-4 h-100 bg-white">
+          <img class="dash-thumb mb-3" src="assets/db_financial_banking_complaints.jpg" alt="Financial Banking Complaints dashboard">
+          <h5 class="mb-2">Financial Banking Complaints</h5>
+          <p class="small text-secondary">Complaint volume, categories, sentiment & geo analysis.</p>
+          <div class="d-flex gap-2">
+            <!-- Paste this viz’s EMBED link in data-embed 
+            <button class="btn btn-brand open-viz" data-embed="<div class='tableauPlaceholder' id='viz1757269144977' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fi&#47;FinancialBankingComplaints&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FinancialBankingComplaints&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Fi&#47;FinancialBankingComplaints&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1757269144977');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1400px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='2727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>" data-bs-toggle="modal" data-bs-target="#vizModal">
+              <i class="fa-solid fa-eye me-2"></i>View -->
+            </button>
+            <a class="btn btn-outline-secondary" href="https://public.tableau.com/views/FinancialBankingComplaints/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Open on Tableau
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions Risk Analysis Dashboard -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+        <div class="p-3 border rounded-4 h-100 bg-white">
+          <img class="dash-thumb mb-3" src="assets/db_transactions_risk.jpg" alt="Transactions Risk Analysis dashboard">
+          <h5 class="mb-2">Transactions Risk Analysis</h5>
+          <p class="small text-secondary">KPI trends, high-risk segments, anomaly flags.</p>
+          <div class="d-flex gap-2">
+            <!--  <button class="btn btn-brand open-viz" data-embed="<div class='tableauPlaceholder' id='viz1757269255918' style='position: relative'><noscript><a href='#'><img alt='Transcations Risk Analysis Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;TransactionsRiskAnalysisDashboard&#47;TranscationsRiskAnalysisDashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='TransactionsRiskAnalysisDashboard&#47;TranscationsRiskAnalysisDashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;TransactionsRiskAnalysisDashboard&#47;TranscationsRiskAnalysisDashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1757269255918');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1800px';vizElement.style.height='927px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1800px';vizElement.style.height='927px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>" data-bs-toggle="modal" data-bs-target="#vizModal">
+              <i class="fa-solid fa-eye me-2"></i>View -->
+            </button>
+            <a class="btn btn-outline-secondary" href="https://public.tableau.com/views/TransactionsRiskAnalysisDashboard/TranscationsRiskAnalysisDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Open on Tableau
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Super Store dashboard -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="p-3 border rounded-4 h-100 bg-white">
+          <img class="dash-thumb mb-3" src="assets/db_superstore.jpg" alt="Super Store dashboard">
+          <h5 class="mb-2">Super Store</h5>
+          <p class="small text-secondary">Sales, profit, category & region drill-downs.</p>
+          <div class="d-flex gap-2">
+          <!--  <button class="btn btn-brand open-viz" data-embed="<div class='tableauPlaceholder' id='viz1757269292336' style='position: relative'><noscript><a href='#'><img alt='Superstore ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Su&#47;Superstoredashboard_17047646177270&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Superstoredashboard_17047646177270&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Su&#47;Superstoredashboard_17047646177270&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1757269292336');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1527px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>" data-bs-toggle="modal" data-bs-target="#vizModal">
+              <i class="fa-solid fa-eye me-2"></i>View -->
+            </button>
+            <a class="btn btn-outline-secondary" href="https://public.tableau.com/views/Superstoredashboard_17047646177270/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Open on Tableau
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Urban Value Dashboard Metrics -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up">
+        <div class="p-3 border rounded-4 h-100 bg-white">
+          <img class="dash-thumb mb-3" src="assets/db_urban_value.jpg" alt="Urban Value Dashboard Metrics">
+          <h5 class="mb-2">Urban Value Dashboard Metrics</h5>
+          <p class="small text-secondary">Payment type mix, location comparisons, top products.</p>
+          <div class="d-flex gap-2">
+           <!-- <button class="btn btn-brand open-viz" data-embed="<div class='tableauPlaceholder' id='viz1757269324149' style='position: relative'><noscript><a href='#'><img alt='Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ur&#47;UrbanValueDashboardMetrics&#47;Dashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='UrbanValueDashboardMetrics&#47;Dashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ur&#47;UrbanValueDashboardMetrics&#47;Dashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1757269324149');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1027px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>" data-bs-toggle="modal" data-bs-target="#vizModal">
+              <i class="fa-solid fa-eye me-2"></i>View -->
+            </button>
+            <a class="btn btn-outline-secondary" href="https://public.tableau.com/views/UrbanValueDashboardMetrics/Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Open on Tableau
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Winter Olympics -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+        <div class="p-3 border rounded-4 h-100 bg-white">
+          <img class="dash-thumb mb-3" src="assets/db_winter_olympics.jpg" alt="Winter Olympics dashboard">
+          <h5 class="mb-2">Winter Olympics</h5>
+          <p class="small text-secondary">Medal tally, athletes by discipline & country trends.</p>
+          <div class="d-flex gap-2">
+           <!-- <button class="btn btn-brand open-viz" data-embed="<div class='tableauPlaceholder' id='viz1757269366445' style='position: relative'><noscript><a href='#'><img alt='Dashboard ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wi&#47;Winter_Olympics_2022_Final_Dashboard_Pradeep_Kodeboina&#47;Dashboard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Winter_Olympics_2022_Final_Dashboard_Pradeep_Kodeboina&#47;Dashboard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Wi&#47;Winter_Olympics_2022_Final_Dashboard_Pradeep_Kodeboina&#47;Dashboard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1757269366445');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1177px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>" data-bs-toggle="modal" data-bs-target="#vizModal">
+              <i class="fa-solid fa-eye me-2"></i>View -->
+            </button>
+            <a class="btn btn-outline-secondary" href="https://public.tableau.com/views/Winter_Olympics_2022_Final_Dashboard_Pradeep_Kodeboina/Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>Open on Tableau
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- EXPERIENCE (split 75/25) -->
+  <section id="experience">
+    <div class="container-xxl">
+      <h2 class="section-title">Experience & Education</h2>
+
+      <p class="mb-4">
+        <span class="xp-chip me-2">7+ yrs BI & Analytics</span>
+        <span class="xp-chip me-2">GIS · Transportation · Healthcare · Analytics</span>
+        <span class="xp-chip me-2">Power BI · Tableau · Python · SQL</span>
+        <span class="xp-chip">Available: Immediate</span>
+      </p>
+
+      <div class="xp-split">
+        <!-- LEFT: WORK (75%) -->
+        <div>
+          <h5 class="mb-3">Work Experience</h5>
+          <div class="xp">
+
+            <!-- Nationwide -->
+            <div class="xp-item" data-aos="fade-up" data-aos-delay="100">
+              <div class="xp-pin"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/nationwide-logo.png" alt="Nationwide"></div>
+                  <div>
+                    <p class="xp-role">GIS Data Analyst</p>
+                    <div class="xp-meta">Nationwide Insurance · Jul 2023 – Present · Columbus, OH</div>
+                  </div>
+                </div>
+                <ul class="small xp-bullets mb-0">
+                  <li>Partnered with healthcare and claims teams to address census tract–level mapping needs for behavioral health capacity. Designed geospatial datasets in ArcGIS Pro and Online, ensuring accurate coverage models, enabling data-driven resource allocation and improved access planning.</li>
+                  <li>Tasked with validating service access, applied ArcGIS Network Analysis to calculate optimized travel times and route distances. Automated routing scripts in ArcPy to minimize manual work, improving validation accuracy by 35% and supporting Managed Care program compliance.</li>
+                  <li>Collaborated with Engineers to integrate ArcGIS shapefiles with Tableau dashboards, creating interactive geospatial visualizations. Delivered training to stakeholders on interpreting maps, improving transparency, reducing reporting turnaround by 40%.</li>
+                  <li>Automated batch geoprocessing workflows using ArcPy and ModelBuilder in ArcGIS Pro to perform topology validation, schema checks, and spatial data QA/QC, reducing manual data correction workload by 40%. </li>
+                  <li>Authored SOPs, metadata documentation, and internal training wikis to standardize geospatial workflows. Facilitated workshops to upskill junior analysts in ArcGIS tools, routing models, and Tableau integration, raising team performance and reducing dependency on technical staff.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Amazon Sr. Data Analyst -->
+            <div class="xp-item" data-aos="fade-up" data-aos-delay="50">
+              <div class="xp-pin"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/amazon-logo.png" alt="Amazon"></div>
+                  <div>
+                    <p class="xp-role">Senior GIS Data Analyst – Last Mile Analytics & Transportation</p>
+                    <div class="xp-meta">Amazon · Dec 2019 – Jul 2021 · India (global teams)</div>
+                  </div>
+                </div>
+                <ul class="small xp-bullets mb-0">
+                  <li>Created and maintained spatial databases in Microsoft SQL Server; migrated and digitized roadway and zoning data into ArcGIS Desktop and ArcMap environments, improving data quality and reducing manual editing time by 30%.</li>
+                  <li>Partnered with logistics and transportation stakeholders to ensure alignment of GIS roadway data with delivery routes, zoning regulations, and disaster-prone geographies; contributed to GIS-driven risk mitigation and infrastructure planning.</li>
+                  <li>Designed and published interactive WebMaps and dashboards in ArcGIS Online for visualizing route anomalies and SLA performance, using Web AppBuilder and Experience Builder to streamline stakeholder access.</li>
+                  <li>Applied Linear Referencing System (LRS) techniques to map complaint density and align service issues with delivery paths; supported GIS-driven zoning policy changes and helped reduce customer complaint resolution time by 15%.</li>
+                  <li>Built automated QA/QC pipelines for digitized spatial datasets using ArcPy and Python; enforced topology rules and schema integrity for GIS layers in ArcGIS Desktop and Online, aligned with state compliance standards.</li>
+                  <li>Queried spatial datasets using SQL window functions and performed advanced calculations in Excel (VBA) to identify inefficiencies; visualized KPIs like fuel efficiency and delivery accuracy in Power BI, leading to $80K in annual cost savings. </li>
+                  <li>Automated data ingestion and synchronization workflows between Esri ArcGIS and AWS S3 using Python (boto3, osgeo); reduced GIS data retrieval latency by 20% and improved reliability for downstream analytics applications. </li>
+                  <li>Conducted root cause analysis of delivery delays and outlier routes using geospatial joins and clustering techniques in Python and ArcGIS, supporting operational decision-making and routing optimization.</li>
+                  </ul>
+              </div>
+            </div>
+
+            <!-- Amazon Data Analyst -->
+            <div class="xp-item" data-aos="fade-up">
+              <div class="xp-pin"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/amazon-logo.png" alt="Amazon"></div>
+                  <div>
+                    <p class="xp-role">GIS Data Analyst – Last Mile Analytics & Transportation </p>
+                    <div class="xp-meta">Amazon · Nov 2017 – Nov 2019 · India (global teams)</div>
+                  </div>
+                </div>
+                <ul class="small xp-bullets mb-0">
+                  <li>Consolidated and cleaned customer operations and GIS line data using SQL and Python, performed EDA to improve completeness of roadway segment datasets, applying validation rules in Informatica and Collibra to support accurate feature layer editing in ArcGIS.</li>
+                  <li>Integrated route alignment checks using ArcGIS and OSM basemaps, reducing inconsistencies, scan errors and man-hours by 20%.</li>
+                  <li>Linked 400+ customer-reported, location-tagged issues to delivery routes using AWS to inform GIS-driven customer service zone improvements.</li>
+                  <li>Performed Linear Referencing System (LRS) based mapping of complaint density along delivery lines, which reduced average response time by 15% and informed customer service zoning strategies.</li>
+                  </ul>
+              </div>
+            </div>
+
+            <!-- Orange Leaf -->
+            <div class="xp-item" data-aos="fade-up">
+              <div class="xp-pin"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/orangeleaf-logo.png" alt="Orange Leaf"></div>
+                  <div>
+                    <p class="xp-role">Data Analyst</p>
+                    <div class="xp-meta">Orange Leaf · Jul 2016 – Oct 2017 · India</div>
+                  </div>
+                </div>
+                <ul class="small xp-bullets mb-0">
+                  <li>Collaborated with marketing teams to analyze email and social media campaign performance, using SQL and SAS to identify conversion patterns and optimize segmentation strategies, contributing to a 15% boost in engagement and lead generation.</li>
+                  <li>Utilized social media analytics tools Hootsuite and Buffer to monitor and report campaign performance, comparing insights like skip rate and completion rate, using strategic marketing to understand suitable length of ads improving engagement rates by 26%.</li>
+                  </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: EDUCATION (25%) -->
+        <div>
+          <h5 class="mb-3">Education</h5>
+          <div class="xp">
+
+            <!-- Master's -->
+            <div class="xp-item" data-aos="fade-up" data-aos-delay="50">
+              <div class="xp-pin"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/neu-logo.png" alt="Northeastern University"></div>
+                  <div>
+                    <p class="xp-role">M.S., Data Analytics (AI &amp; ML)</p>
+                    <div class="xp-meta">Northeastern University, Boston, MA</div>
+                    <div class="xp-meta">Sep 2021 – May 2023</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bachelor's -->
+            <div class="xp-item" data-aos="fade-up">
+              <div class="xp-pin"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="xp-card">
+                <div class="xp-head">
+                  <div class="xp-logo"><img src="assets/vignan-logo.png" alt="Vignan University"></div>
+                  <div>
+                    <p class="xp-role">B.Tech, Computer Science</p>
+                    <div class="xp-meta">Vignan's University, Guntur, India</div>
+                    <div class="xp-meta">Jul 2012 – May 2016</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /xp-split -->
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- SKILLS -->
+<section id="skills">
+  <div class="container-xxl">
+    <h2 class="section-title">Skills</h2>
+    <div class="row g-4">
+      <div class="col-12" data-aos="fade-up">
+        <div class="p-3 border rounded-4">
+          
+          <div class="mb-2 fw-bold">GIS & Geospatial Tools</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">ArcGIS Pro</span>
+            <span class="badge-soft">ArcGIS Desktop</span>
+            <span class="badge-soft">ArcGIS Online</span>
+            <span class="badge-soft">ArcMap</span>
+            <span class="badge-soft">ModelBuilder</span>
+            <span class="badge-soft">Network Analyst</span>
+            <span class="badge-soft">Web AppBuilder</span>
+            <span class="badge-soft">QGIS</span>
+          </div>
+
+          <div class="mt-3 mb-2 fw-bold">Spatial Analysis</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">LISA cluster/outlier analysis</span>
+            <span class="badge-soft">Catchment area analysis</span>
+            <span class="badge-soft">Census tract/block analysis</span>
+            <span class="badge-soft">Route & time-distance calculations</span>
+          </div>
+
+          <div class="mt-3 mb-2 fw-bold">Programming & Analytics</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">Python</span>
+            <span class="badge-soft">ArcPy</span>
+            <span class="badge-soft">Pandas</span>
+            <span class="badge-soft">NumPy</span>
+            <span class="badge-soft">SAS</span>
+            <span class="badge-soft">R</span>
+            <span class="badge-soft">SQL</span>
+            <span class="badge-soft">Excel (Advanced)</span>
+          </div>
+
+          <div class="mt-3 mb-2 fw-bold">Visualization & BI</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">Tableau</span>
+            <span class="badge-soft">ArcGIS–Tableau integration</span>
+            <span class="badge-soft">Power BI</span>
+            <span class="badge-soft">Geospatial dashboards</span>
+          </div>
+
+          <div class="mt-3 mb-2 fw-bold">Data Management</div>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge-soft">Relational databases</span>
+            <span class="badge-soft">Metadata standards</span>
+            <span class="badge-soft">QA/QC checks</span>
+            <span class="badge-soft">SOP development</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- CERTIFICATIONS -->
+<section id="certifications" class="bg-light">
+  <div class="container-xxl">
+    <h2 class="section-title">Certifications</h2>
+
+    <div class="row g-4">
+      <!-- PL-300 -->
+      <div class="col-sm-6 col-lg-4" data-aos="fade-up">
+        <div class="project-card h-100">
+          <img class="cert-img" src="assets/Microsoft_Power_BI_Certification.png" alt="Microsoft Power BI Data Analyst (PL-300)">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">Microsoft</span>
+              <span class="badge-soft">Power BI</span>
+              <span class="badge-soft">DAX</span>
+            </div>
+            <h5 class="mb-1">Microsoft Certified: Power BI Data Analyst (PL-300)</h5>
+            <p class="small text-secondary mb-3">Model data, DAX, visuals, governance & deployment.</p>
+            <div class="d-flex gap-2">
+              <!-- Replace with your public verification link -->
+              <a class="btn btn-sm btn-outline-primary" href="https://learn.microsoft.com/en-us/users/pradeepkodeboina/credentials/220e938e6a96a915" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Verify
+              </a>
+              <!-- Optional: link to your PDF badge/cert -->
+              <a class="btn btn-sm btn-outline-secondary" href="assets/Microsoft_Power_BI_Certification.png" target="_blank">
+                <i class="fa-solid fa-file-pdf me-1"></i> PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tableau Data Analyst -->
+      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="50">
+        <div class="project-card h-100">
+          <img class="cert-img" src="assets/Tableau_Certification.jpg" alt="Tableau Data Analyst">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">Tableau</span>
+              <span class="badge-soft">Visual Analytics</span>
+              <span class="badge-soft">Dashboards</span>
+            </div>
+            <h5 class="mb-1">Tableau Certified Data Analyst</h5>
+            <p class="small text-secondary mb-3">Prep, build, publish & govern data-driven dashboards.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-primary" href="https://www.udemy.com/certificate/UC-9a26a576-2d5e-46bb-892d-57bdebd05329/" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Verify
+              </a>
+              <a class="btn btn-sm btn-outline-secondary" href="assets/Tableau_Certification.jpg" target="_blank">
+                <i class="fa-solid fa-file-pdf me-1"></i> PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AWS Data Analytics 
+      <div class="col-sm-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-card h-100">
+          <img class="cert-img" src="assets/cert_aws_data_analytics.png" alt="AWS Certified Data Analytics">
+          <div class="p-3">
+            <div class="d-flex flex-wrap gap-2 mb-2">
+              <span class="badge-soft">AWS</span>
+              <span class="badge-soft">Data Analytics</span>
+              <span class="badge-soft">Cloud</span>
+            </div>
+            <h5 class="mb-1">AWS Certified Data Analytics</h5>
+            <p class="small text-secondary mb-3">Ingest, store, process, and visualize at scale on AWS.</p>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-primary" href="REPLACE_WITH_YOUR_AWS_VERIFY_URL" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Verify
+              </a>
+              <a class="btn btn-sm btn-outline-secondary" href="assets/certificates/aws_data_analytics.pdf" target="_blank">
+                <i class="fa-solid fa-file-pdf me-1"></i> PDF
+              </a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- (Optional) add more cards the same way -->
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  <!-- ABOUT -->
+  <section id="about" class="bg-light">
+    <div class="container-xxl">
+      <h2 class="section-title">About</h2>
+      <div class="row align-items-center g-4">
+        <div class="col-md-5" data-aos="fade-right">
+          <img src="assets/Pradeep Kodeboina.png" class="img-fluid rounded-4 border" alt="Pradeep portrait">
+        </div>
+        <div class="col-md-7" data-aos="fade-left">
+          <p class="lead">I combine data analysis and Geographic Information Systems (GIS) to deliver decision-ready products that optimize transportation logistics, enhance digital maps, and boost validation accuracy.</p>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fa-solid fa-location-dot text-danger me-2"></i>Columbus, OH (open to relocate)</li>
+            <li class="mb-2"><i class="fa-solid fa-envelope text-primary me-2"></i><a href="mailto:kodeboinapradeep@gmail.com">kodeboinapradeep@gmail.com</a></li>           
+            <a href="assets/Pradeep_Kodeboina_GIS_Resume.pdf" class="btn btn-outline-secondary btn-lg"><i class="fa-solid fa-file-arrow-down me-2"></i>Resume (PDF)</a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container-xxl">
+      <div class="row justify-content-center">
+        <div class="col-lg-8" data-aos="zoom-in">
+          <div class="p-4 p-md-5 border rounded-4 text-center">
+            <h3 class="fw-bold mb-2">Let’s work together</h3>
+            <p class="text-secondary mb-4">Have a role or project in mind? I’m available for immediate onboarding.</p>
+            <a href="mailto:kodeboinapradeep@gmail.com" class="btn btn-brand btn-lg me-2"><i class="fa-solid fa-paper-plane me-2"></i>Email Me</a>
+            <a href="assets/Pradeep_Kodeboina_GIS_Resume.pdf" class="btn btn-outline-secondary btn-lg"><i class="fa-solid fa-file-arrow-down me-2"></i>Resume (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container-xxl text-center small">
+      © <span id="y"></span> Pradeep Kodeboina · Built with Bootstrap · Hosted on GitHub Pages
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- VIZ MODAL (reusable) -->
+<div class="modal fade" id="vizModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Dashboard Viewer</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <iframe id="vizFrame" src="" width="100%" height="720" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- JS: Bootstrap + AOS + Typed + helpers -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // AOS
+    AOS.init({ duration: 600, once: true });
+
+    // Typed.js
+    new Typed('#typed', {
+      strings: ['Data Analytics · Business Intelligence · Machine Learning', 'GIS · Transportation · Logistics · Health Insurance', 'SQL · Python · Power BI · Tableau'],
+      typeSpeed: 30, backSpeed: 16, backDelay: 1500, loop: true
+    });
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Theme toggle + icon swap
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const applyTheme = (t) => {
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+      if (themeIcon){ themeIcon.className = t === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'; }
+    };
+    applyTheme(localStorage.getItem('theme') || 'light');
+    themeBtn?.addEventListener('click', () => {
+      const next = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+      applyTheme(next);
+    });
+
+    // ScrollSpy
+    new bootstrap.ScrollSpy(document.body, { target: '#navbarLinks', offset: 80 });
+
+    // Project filter
+    const filterBtns = document.querySelectorAll('.filter [data-filter]');
+    const cards = document.querySelectorAll('.project');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.getAttribute('data-filter');
+        cards.forEach(c => c.style.display = (f === 'all' || c.dataset.category === f) ? '' : 'none');
+      });
+    });
+    // Reusable viz modal loader
+document.querySelectorAll('.open-viz').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const url = btn.getAttribute('data-embed'); // paste EMBED link here
+    document.getElementById('vizFrame').src = url;
+  });
+});
+// Clear iframe on close to stop background downloads
+document.getElementById('vizModal')?.addEventListener('hidden.bs.modal', () => {
+  document.getElementById('vizFrame').src = '';
+});
+  </script>
+</body>
+</html>
